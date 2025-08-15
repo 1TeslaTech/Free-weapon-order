@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خرید اسلحه رایگان - سفارش اسلحه رایگان با تحویل فوری</title>
+    <meta name="description" content="خرید اسلحه رایگان با ثبت سفارش ساده. اسلحه های با کیفیت بالا بدون هزینه. سفارش دهید و بلافاصله دریافت کنید.">
+    <meta name="keywords" content="خرید اسلحه رایگان, اسلحه رایگان, سفارش اسلحه, خرید اسلحه بدون هزینه, اسلحه مجانی">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="خرید اسلحه رایگان">
+    <meta property="og:description" content="سایت رسمی برای خرید اسلحه رایگان با ثبت سفارش آسان.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourusername.github.io/your-repo">
+    <meta property="og:image" content="https://yourusername.github.io/your-repo/n00008416-b.jpg">
+    <link rel="canonical" href="https://yourusername.github.io/your-repo">
+
+    <!-- فونت زیباتر و ترسناک -->
+    <link href="https://fonts.googleapis.com/css2?family=Nosifer&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #ff0000;
+            font-family: 'Nosifer', cursive;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* صفحه سفید برای کاربران محدود شده */
+        body.restricted {
+            background-color: #fff;
+            display: block;
+        }
+
+        body.restricted::before,
+        body.restricted #orderButton,
+        body.restricted #successMessage,
+        body.restricted .particle {
+            display: none !important;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,0,0,0.1), rgba(0,0,0,0.8));
+            animation: pulse 5s infinite;
+            z-index: -1;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+
+        /* دکمه شیشه‌ای و دایره‌ای */
+        #orderButton {
+            background: rgba(255, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            color: #fff;
+            border: 2px solid rgba(255, 0, 0, 0.5);
+            padding: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.7);
+            transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+        }
+
+        #orderButton:hover {
+            transform: scale(1.1);
+            background: rgba(255, 0, 0, 0.4);
+            box-shadow: 0 0 30px rgba(255, 0, 0, 1);
+        }
+
+        /* پیام موفقیت */
+        #successMessage {
+            display: none;
+            font-size: 28px;
+            text-align: center;
+            animation: fadeIn 1s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* ذرات ترسناک */
+        .particle {
+            position: absolute;
+            background: #ff0000;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            animation: fall 10s linear infinite;
+            opacity: 0.5;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-100vh); }
+            100% { transform: translateY(100vh); }
+        }
+    </style>
+</head>
+<body>
+    <!-- دکمه مرکزی -->
+    <button id="orderButton">ثبت سفارش</button>
+
+    <!-- پیام موفقیت -->
+    <div id="successMessage">سفارش شما با موفقیت ثبت شد!</div>
+
+    <script>
+        // محدودیت با localStorage
+        const visitedKey = 'hasVisited';
+        const hasVisited = localStorage.getItem(visitedKey);
+
+        if (hasVisited) {
+            // نمایش صفحه سفید خالی
+            document.body.classList.add('restricted');
+            document.getElementById('orderButton').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'none';
+        } else {
+            // ثبت در localStorage بعد از کلیک
+            document.getElementById('orderButton').addEventListener('click', function() {
+                localStorage.setItem(visitedKey, 'true');
+                this.style.display = 'none';
+                document.getElementById('successMessage').style.display = 'block';
+
+                // پخش صدای ترسناک
+                const audio = new Audio('https://example.com/creepy-laugh.mp3'); // لینک صوتی را جایگزین کنید
+                audio.play();
+            });
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // ذرات ترسناک
+        function createParticle() {
+            if (document.body.classList.contains('restricted')) return; // ذرات در صفحه سفید نمایش داده نمی‌شوند
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.animationDuration = Math.random() * 5 + 5 + 's';
+            document.body.appendChild(particle);
+
+            setTimeout(() => {
+                particle.remove();
+            }, 10000);
+        }
+
+        setInterval(createParticle, 500);
+    </script>
+</body>
+</html>
